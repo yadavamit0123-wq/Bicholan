@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "458738419161",
+    "project_id": "active-matrimonial-5ab44",
+    "storage_bucket": "active-matrimonial-5ab44.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:458738419161:android:d821cd9c6ba873d894c5c8",
+        "android_client_info": {
+          "package_name": "com.activematrimonial.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhxZdw6gxjmzzCvtdFo8brLH4yiBfK53I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

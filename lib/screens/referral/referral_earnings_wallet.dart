@@ -1,0 +1,387 @@
+import 'package:active_matrimonial_flutter_app/components/common_app_bar.dart';
+import 'package:active_matrimonial_flutter_app/components/common_widget.dart';
+import 'package:active_matrimonial_flutter_app/components/name_date_row.dart';
+import 'package:active_matrimonial_flutter_app/const/my_theme.dart';
+import 'package:active_matrimonial_flutter_app/const/style.dart';
+import 'package:active_matrimonial_flutter_app/screens/core.dart';
+import 'package:active_matrimonial_flutter_app/screens/my_dashboard_pages/wallet/wallet_balance_middleware.dart';
+import 'package:active_matrimonial_flutter_app/screens/referral/referral_withdraw_request_history_middleware.dart';
+import 'package:flutter/material.dart';
+import 'package:active_matrimonial_flutter_app/l10n/app_localizations.dart';
+
+import 'referral_withdraw_request_middleware.dart';
+
+class ReferralEarningsWallet extends StatefulWidget {
+  const ReferralEarningsWallet({super.key});
+
+  @override
+  State<ReferralEarningsWallet> createState() => _ReferralEarningsWalletState();
+}
+
+class _ReferralEarningsWalletState extends State<ReferralEarningsWallet> {
+  final TextEditingController _amount = TextEditingController();
+  final TextEditingController _details = TextEditingController();
+
+  ScrollController scrollController = ScrollController();
+
+
+  bool _isRefreshing = false;
+
+  @override
+  void initState() {
+    super.initState();
+    if (!store.state.userVerifyState!.isApprove!) {
+      OneContext().pop();
+      store.dispatch(
+        ShowMessageAction(
+          msg: "Please verify your account",
+          color: MyTheme.failure,
+        ),
+      );
+    } else {
+      store.dispatch(Reset.referralHistoryRequestList);
+      store.dispatch(walletBalanceMiddleware());
+      store.dispatch(referralWithdrawRequestHistoryMiddleware());
+    }
+    scrollController.addListener(() {
+      if (scrollController.position.maxScrollExtent ==
+          scrollController.offset) {
+        if (store.state.referralWithdrawRequestHistoryState!.hasMore!) {
+          store.dispatch(walletBalanceMiddleware());
+          store.dispatch(referralWithdrawRequestHistoryMiddleware());
+        }
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    scrollController.dispose();
+    _amount.dispose();
+    _details.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return StoreConnector<AppState, AppState>(
+      converter: (store) => store.state,
+      builder:
+          (_, state) => Scaffold(
+        appBar: CommonAppBar(
+          text: AppLocalizations.of(context)!.referral_earnings_wallet,
+        ).build(context),
+        body: SafeArea(
+          child: RefreshIndicator(
+            color: MyTheme.app_accent_color,
+            onRefresh: () async {
+
+              setState(() {
+                _isRefreshing = true;
+              });
+
+              store.dispatch(Reset.referralHistoryRequestList);
+              store.dispatch(walletBalanceMiddleware());
+              store.dispatch(referralWithdrawRequestHistoryMiddleware());
+
+
+              await Future.delayed(const Duration(seconds: 2));
+
+
+              if(mounted){
+                setState(() {
+                  _isRefreshing = false;
+                });
+              }
+            },
+            child: SingleChildScrollView(
+              controller: scrollController,
+              physics: const AlwaysScrollableScrollPhysics(),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const SizedBox(height: 15),
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: Const.kPaddingHorizontal,
+                    ),
+                    child: Row(
+                      children: [
+                        buildWalletBalance(state),
+                        Const.width15,
+                        buildWalletRecharge(),
+                      ],
+                    ),
+                  ),
+                  Const.height20,
+
+
+                  state.referralWithdrawRequestHistoryState!.isFetching! &&
+                      state.referralWithdrawRequestHistoryState!.referralWithdrawRequestHistoryList!.isEmpty
+                      ? SizedBox(
+                    height: 300,
+
+                    child: _isRefreshing
+                        ? const SizedBox()
+                        : Center(child: CommonWidget.circularIndicator),
+                  )
+                      : buildListViewSeparated(state),
+
+                  const SizedBox(height: 20),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildListViewSeparated(AppState state) {
+    return state.referralWithdrawRequestHistoryState!
+        .referralWithdrawRequestHistoryList!.isNotEmpty
+        ? ListView.separated(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemCount: state.referralWithdrawRequestHistoryState!
+          .referralWithdrawRequestHistoryList!.length +
+          1,
+      separatorBuilder: (BuildContext context, int index) => Const.height15,
+      itemBuilder: (BuildContext context, int index) {
+        if (index ==
+            state.referralWithdrawRequestHistoryState!
+                .referralWithdrawRequestHistoryList!.length) {
+          return Center(
+            child: state.referralWithdrawRequestHistoryState!.hasMore!
+                ? CircularProgressIndicator(
+              color: MyTheme.storm_grey,
+            )
+                : const Padding(
+              padding: EdgeInsets.symmetric(vertical: 10),
+              child: Text('No more data'),
+            ),
+          );
+        }
+        return Container(
+          margin: EdgeInsets.symmetric(
+            horizontal: Const.kPaddingHorizontal,
+          ),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: const BorderRadius.all(
+              Radius.circular(12.0),
+            ),
+            boxShadow: [CommonWidget.box_shadow()],
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(
+              left: 20,
+              top: 14,
+              bottom: 14,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                NameDataRow(
+                  name: AppLocalizations.of(context)!.wallet_screen_date,
+                  data: state.referralWithdrawRequestHistoryState!
+                      .referralWithdrawRequestHistoryList![index].date,
+                ),
+                Const.height5,
+                NameDataRow(
+                  name: AppLocalizations.of(context)!.wallet_screen_amount,
+                  data: state.referralWithdrawRequestHistoryState!
+                      .referralWithdrawRequestHistoryList![index].amount,
+                ),
+                Const.height5,
+                NameDataRow(
+                  name: AppLocalizations.of(context)!.wallet_screen_details,
+                  data: state.referralWithdrawRequestHistoryState!
+                      .referralWithdrawRequestHistoryList![index].details ??
+                      '',
+                ),
+                Const.height5,
+                NameDataRow(
+                  name: AppLocalizations.of(context)!.wallet_screen_status,
+                  data: state.referralWithdrawRequestHistoryState!
+                      .referralWithdrawRequestHistoryList![index].status,
+                  style: state.referralWithdrawRequestHistoryState!
+                      .referralWithdrawRequestHistoryList![index].status !=
+                      'Approved'
+                      ? Styles.bold_arsenic_12
+                      : Styles.bold_green_12,
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    )
+        : CommonWidget.noData;
+  }
+
+  Expanded buildWalletBalance(AppState state) {
+    return Expanded(
+      child: Container(
+        height: 95,
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(16.0)),
+          color: MyTheme.app_accent_color,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 11),
+          child: Column(
+            children: [
+              Image.asset('assets/icon/icon_my_wallet.png', height: 16),
+              Const.height10,
+              Text(state.myWalletState!.balance!, style: Styles.bold_white_14),
+              Const.height5,
+              Text(
+                AppLocalizations.of(context)!.wallet_screen_my_wallet,
+                style: const TextStyle(
+                  color: Color.fromRGBO(225, 227, 230, 1),
+                  fontSize: 12,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Expanded buildWalletRecharge() {
+    return Expanded(
+      child: GestureDetector(
+        onTap: () => rechargeWalletDialog(),
+        child: Container(
+          height: 95,
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+            color: MyTheme.zircon,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: Center(
+              child: Column(
+                children: [
+                  Image.asset('assets/icon/icon_plus.png', height: 16),
+                  Const.height15,
+                  Text(
+                    AppLocalizations.of(context)!.referral_earnings_wallet,
+                    style: Styles.regular_arsenic_12,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Future rechargeWalletDialog() {
+    return OneContext().showDialog<void>(
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          contentPadding: const EdgeInsets.fromLTRB(24, 20, 24, 24),
+          titlePadding: EdgeInsets.zero,
+          title: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+            decoration: BoxDecoration(
+              border: Border(bottom: BorderSide(color: Colors.grey.shade100)),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Recharge Wallet', style: Styles.bold_arsenic_16),
+                IconButton(
+                  onPressed: () => Navigator.pop(context),
+                  icon: const Icon(Icons.close, size: 20, color: Colors.grey),
+                  constraints: const BoxConstraints(),
+                  padding: EdgeInsets.zero,
+                ),
+              ],
+            ),
+          ),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Amount *', style: Styles.regular_arsenic_12.copyWith(fontWeight: FontWeight.w600)),
+                const SizedBox(height: 8),
+                TextField(
+                  controller: _amount,
+                  keyboardType: TextInputType.number,
+                  style: const TextStyle(fontSize: 14),
+                  decoration: buildInputDecoration("Enter Amount", Icons.attach_money),
+                ),
+                const SizedBox(height: 20),
+                Text('Details *', style: Styles.regular_arsenic_12.copyWith(fontWeight: FontWeight.w600)),
+                const SizedBox(height: 8),
+                TextField(
+                  controller: _details,
+                  maxLines: 3,
+                  style: const TextStyle(fontSize: 14),
+                  decoration: buildInputDecoration("Enter Details", Icons.description_outlined),
+                ),
+                const SizedBox(height: 24),
+                SizedBox(
+                  width: double.infinity,
+                  height: 48,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: MyTheme.app_accent_color,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      elevation: 0,
+                    ),
+                    onPressed: _submit,
+                    child: Text(
+                      AppLocalizations.of(context)!.common_confirm,
+                      style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  InputDecoration buildInputDecoration(String hint, IconData icon) {
+    return InputDecoration(
+      hintText: hint,
+      prefixIcon: Icon(icon, size: 18, color: Colors.grey),
+      filled: true,
+      fillColor: MyTheme.solitude,
+      isDense: true,
+      contentPadding: const EdgeInsets.all(12),
+      hintStyle: Styles.regular_gull_grey_12,
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.grey.shade200),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
+        borderSide: const BorderSide(color: MyTheme.app_accent_color, width: 1.5),
+      ),
+    );
+  }
+
+  void _submit() {
+    if (_amount.text != '' && _details.text != '') {
+      store.dispatch(
+        referralWithdrawRequestMiddleware(
+          amount: _amount.text,
+          details: _details.text,
+        ),
+      );
+    }
+    OneContext().popDialog();
+  }
+}
