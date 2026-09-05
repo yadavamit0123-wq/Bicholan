@@ -194,7 +194,7 @@ class _SignUpState extends State<SignUp> {
                                       style: Styles.bold_app_accent_12,
                                       child: DropdownButtonFormField<dynamic>(
                                         isExpanded: true,
-                                        initialValue:
+                                        value:
                                             state
                                                 .signUpState!
                                                 .on_behalves_value,
@@ -293,7 +293,7 @@ class _SignUpState extends State<SignUp> {
                                       style: Styles.bold_app_accent_12,
                                       child: DropdownButtonFormField<dynamic>(
                                         isExpanded: true,
-                                        initialValue:
+                                        value:
                                             state.signUpState!.currentGender,
                                         icon: Icon(
                                           Icons.keyboard_arrow_down,
