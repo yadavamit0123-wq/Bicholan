@@ -9,8 +9,8 @@ plugins {
 
 android {
     namespace = "com.pt.bicholan"
-    compileSdk = 36
-    ndkVersion = "29.0.14206865"
+    compileSdk = 35
+    ndkVersion = "27.0.12077973"
 
     compileOptions {
         // Enable core library desugaring and use Java 21
@@ -26,7 +26,7 @@ android {
     defaultConfig {
         applicationId = "com.pt.bicholan"
         minSdk = flutter.minSdkVersion
-        targetSdk = 36
+        targetSdk = 35
         versionCode = flutter.versionCode
         versionName = flutter.versionName
         multiDexEnabled = true
