@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.active_matrimonial_flutter_app"
+    namespace = "com.pt.bicholan"
     compileSdk = 36
     ndkVersion = "29.0.14206865"
 
@@ -24,7 +24,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.activematrimonial.app"
+        applicationId = "com.pt.bicholan"
         minSdk = flutter.minSdkVersion
         targetSdk = 36
         versionCode = flutter.versionCode

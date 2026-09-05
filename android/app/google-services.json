@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "458738419161",
-    "project_id": "active-matrimonial-5ab44",
-    "storage_bucket": "active-matrimonial-5ab44.firebasestorage.app"
+    "project_number": "1029452495675",
+    "project_id": "bicholan",
+    "storage_bucket": "bicholan.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:458738419161:android:d821cd9c6ba873d894c5c8",
+        "mobilesdk_app_id": "1:1029452495675:android:56c239b4b14995c349d51e",
         "android_client_info": {
-          "package_name": "com.activematrimonial.app"
+          "package_name": "com.pt.bicholan"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDhxZdw6gxjmzzCvtdFo8brLH4yiBfK53I"
+          "current_key": "AIzaSyB0aZbyTj6kMeJppL4NnuyfU4n7qWeICJI"
         }
       ],
       "services": {

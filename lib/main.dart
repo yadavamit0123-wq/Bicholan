@@ -2,6 +2,7 @@ import 'package:active_matrimonial_flutter_app/redux/app/app_state.dart';
 import 'package:active_matrimonial_flutter_app/redux/app/reducer.dart';
 import 'package:active_matrimonial_flutter_app/screens/startup_pages/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:active_matrimonial_flutter_app/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:active_matrimonial_flutter_app/l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -14,7 +15,9 @@ import 'helpers/shared_pref.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await SharedPref().init();
   runApp(MyApp());
 }
@@ -47,7 +50,7 @@ class _MyAppState extends State<MyApp> {
           appBarTheme: const AppBarTheme(backgroundColor: Colors.white),
         ),
         debugShowCheckedModeBanner: false,
-        title: 'Localizations Sample App',
+        title: 'Bicholan',
         localizationsDelegates: const [
           AppLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,

@@ -1,5 +1,5 @@
 name: active_matrimonial_flutter_app
-description: A complete Flutter matrimonial application with Firebase, authentication, notifications, and admin integration.
+description: Bicholan matrimonial mobile app with Firebase, authentication, notifications, and admin integration.
 publish_to: 'none' 
 version: 2.6.0+1
 
@@ -60,10 +60,14 @@ dev_dependencies:
   flutter_localizations:
     sdk: flutter
 
-flutter_icons:
+flutter_launcher_icons:
   android: true
   ios: true
   image_path: "assets/logo/app_icon.png"
+  adaptive_icon_background: "#000000"
+  adaptive_icon_foreground: "assets/logo/app_icon.png"
+  min_sdk_android: 21
+  remove_alpha_ios: true
 
 # The following section is specific to Flutter packages.
 flutter:
