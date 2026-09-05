@@ -39,6 +39,7 @@ android {
 
     signingConfigs {
         create("release") {
+            storeType = keystoreProperties.getProperty("storeType", "PKCS12")
             keyAlias = keystoreProperties["keyAlias"] as String
             keyPassword = keystoreProperties["keyPassword"] as String
             storeFile = file(keystoreProperties["storeFile"] as String)
