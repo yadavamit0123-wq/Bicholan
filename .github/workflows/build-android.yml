@@ -33,27 +33,41 @@ jobs:
         working-directory: .
         run: flutter pub get
 
-      - name: Decode keystore
+      - name: Prepare release keystore
         run: |
-          echo "${{ secrets.KEYSTORE_BASE64 }}" | tr -d '[:space:]' | base64 --decode > android/app/prt.jks
-          ls -la android/app/prt.jks
+          echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | tr -d '[:space:]' | base64 --decode > android/app/prt-source.jks
+          FILE_SIZE=$(wc -c < android/app/prt-source.jks)
+          echo "Keystore size: ${FILE_SIZE} bytes"
+          if [ "$FILE_SIZE" -lt 1000 ]; then
+            echo "ERROR: Keystore file too small. Re-create ANDROID_KEYSTORE_BASE64 secret."
+            exit 1
+          fi
+          keytool -importkeystore -noprompt \
+            -srckeystore android/app/prt-source.jks \
+            -srcstoretype PKCS12 \
+            -srcstorepass "${{ secrets.ANDROID_KEYSTORE_PASSWORD }}" \
+            -destkeystore android/app/prt.jks \
+            -deststoretype PKCS12 \
+            -deststorepass "${{ secrets.ANDROID_KEYSTORE_PASSWORD }}" \
+            -J-Dkeystore.pkcs12.legacy=true
+          keytool -list -keystore android/app/prt.jks -storetype PKCS12 -storepass "${{ secrets.ANDROID_KEYSTORE_PASSWORD }}" | head -10
 
       - name: Create key.properties
         run: |
-          echo "storePassword=${{ secrets.STORE_PASSWORD }}" > android/key.properties
-          echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> android/key.properties
-          echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> android/key.properties
+          echo "storePassword=${{ secrets.ANDROID_KEYSTORE_PASSWORD }}" > android/key.properties
+          echo "keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}" >> android/key.properties
+          echo "keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}" >> android/key.properties
           echo "storeFile=prt.jks" >> android/key.properties
           echo "storeType=PKCS12" >> android/key.properties
 
-      - name: Verify keystore
-        run: |
-          keytool -list -keystore android/app/prt.jks -storetype PKCS12 -storepass "${{ secrets.STORE_PASSWORD }}" | head -5
-
       - name: Build APK
+        env:
+          JAVA_TOOL_OPTIONS: -Dkeystore.pkcs12.legacy=true
         run: flutter build apk --release
 
       - name: Build AAB
+        env:
+          JAVA_TOOL_OPTIONS: -Dkeystore.pkcs12.legacy=true
         run: flutter build appbundle --release
 
       - name: Upload APK
