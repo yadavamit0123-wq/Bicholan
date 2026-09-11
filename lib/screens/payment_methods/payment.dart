@@ -268,7 +268,7 @@ class _PaymentState extends State<Payment> {
         height: 50,
         child: SizedBox(
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
+          height: 50,
           child: TextButton(
             onPressed: () {
               FocusManager.instance.primaryFocus?.unfocus();

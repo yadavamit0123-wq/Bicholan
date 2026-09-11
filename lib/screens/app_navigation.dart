@@ -67,8 +67,8 @@ class _AppNavigationState extends State<AppNavigation> {
       onWillPop: _handleWillPop,
       child: Scaffold(
         body: _buildBody(),
-        bottomNavigationBar: SizedBox(
-          height: 75,
+        bottomNavigationBar: SafeArea(
+          top: false,
           child: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             currentIndex: _currentIndex,
@@ -102,6 +102,7 @@ class _AppNavigationState extends State<AppNavigation> {
       ),
     );
   }
+
 
   Future<bool> _handleWillPop() async {
     if (_currentIndex != 0) {

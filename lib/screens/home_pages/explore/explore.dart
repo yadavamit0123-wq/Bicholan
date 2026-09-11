@@ -1221,21 +1221,14 @@ class _ExploreState extends State<Explore> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              children: [
-                Image.asset(
-                  'assets/logo/appbar_logo.png',
-                  fit: BoxFit.contain,
-                  height: iconSize,
-                  width: iconSize, // Making it a square based on height
-                ),
-                const SizedBox(width: 8),
-                Text(
-                  AppConfig.app_name,
-                  style: Styles.bold_app_accent_16
-                      .copyWith(fontSize: titleFontSize),
-                ),
-              ],
+            SizedBox(
+              height: iconSize * 1.6,
+              width: MediaQuery.of(context).size.width * 0.42,
+              child: Image.asset(
+                'assets/logo/appbar_logo.png',
+                fit: BoxFit.contain,
+                alignment: Alignment.centerLeft,
+              ),
             ),
             Row(
               children: [

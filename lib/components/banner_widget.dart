@@ -23,19 +23,26 @@ class BannerWidget extends StatelessWidget {
     this.controller,
   });
 
+  /// Home slider: 1920x1080 = 16:9 (same on app + website, no crop)
+  /// Banner section: 1200x600 = 2:1 landscape
+  double get _aspectRatio => isSlider == true ? 16 / 9 : 2 / 1;
+
   @override
   Widget build(BuildContext context) {
+    final screenWidth = DeviceInfo(context).width ?? MediaQuery.of(context).size.width;
+    final bannerHeight = screenWidth / _aspectRatio;
+
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
         Container(
-          height: 200,
-          width: DeviceInfo(context).width,
+          width: screenWidth,
+          height: bannerHeight,
           decoration: const BoxDecoration(
-            borderRadius: BorderRadius.all(
-              Radius.circular(16),
-            ),
+            borderRadius: BorderRadius.all(Radius.circular(16)),
+            color: Color(0xFFFAF6F6),
           ),
+          clipBehavior: Clip.antiAlias,
           child: isFetching
               ? CommonWidget.circularIndicator
               : bannerList.isNotEmpty
@@ -43,17 +50,16 @@ class BannerWidget extends StatelessWidget {
                       carouselController: controller,
                       itemCount: bannerList.length,
                       itemBuilder: (context, index, realIndex) {
-                        return ClipRRect(
-                          borderRadius: BorderRadius.circular(16),
-                          child: bannerList[index].image != null
-                              ? FadeInImage.assetNetwork(
-                                  placeholder: 'assets/images/342x200.png',
-                                  image: bannerList[index].image,
-                                  width: DeviceInfo(context).width,
-                                  fit: BoxFit.cover,
-                                )
-                              : CommonWidget.noData,
-                        );
+                        return bannerList[index].image != null
+                            ? FadeInImage.assetNetwork(
+                                placeholder: 'assets/images/342x200.png',
+                                image: bannerList[index].image,
+                                width: double.infinity,
+                                height: bannerHeight,
+                                fit: BoxFit.contain,
+                                alignment: Alignment.center,
+                              )
+                            : CommonWidget.noData;
                       },
                       options: CarouselOptions(
                         onPageChanged: (index, reason) {
@@ -65,9 +71,10 @@ class BannerWidget extends StatelessWidget {
                                   SetExploreFirstBannerCarouselIndex(
                                       payload: index));
                         },
-                        enlargeCenterPage: true,
+                        height: bannerHeight,
+                        enlargeCenterPage: isSlider == true,
                         autoPlayInterval: const Duration(seconds: 10),
-                        viewportFraction: 0.9,
+                        viewportFraction: isSlider == true ? 0.9 : 1.0,
                         autoPlay: true,
                       ),
                     )
