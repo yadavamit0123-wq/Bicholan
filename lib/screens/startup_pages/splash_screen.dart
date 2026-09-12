@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:active_matrimonial_flutter_app/app_config.dart';
-import 'package:active_matrimonial_flutter_app/const/my_theme.dart';
 import 'package:active_matrimonial_flutter_app/const/style.dart';
 import 'package:active_matrimonial_flutter_app/helpers/device_info.dart';
 import 'package:active_matrimonial_flutter_app/helpers/navigator_push.dart';
@@ -10,7 +9,6 @@ import 'package:active_matrimonial_flutter_app/redux/libs/auth/auth_middleware.d
 import 'package:active_matrimonial_flutter_app/redux/libs/feature/feature_check_middleware.dart';
 import 'package:active_matrimonial_flutter_app/screens/app_navigation.dart';
 import 'package:active_matrimonial_flutter_app/screens/core.dart';
-import 'package:active_matrimonial_flutter_app/screens/startup_pages/landing_page/landing_page.dart';
 import 'package:flutter/material.dart';
 import 'package:info_getter/info_getter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -59,17 +57,8 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   onBoardingPage() {
-
-
-    if (SharedPref().isLoggedIn) {
-      NavigatorPush.push(context, const AppNavigation());
-    } else {
-      if (SharedPref().isView) {
-        NavigatorPush.push(context, const AppNavigation());
-      } else {
-        NavigatorPush.push(context, const LandingPage());
-      }
-    }
+    SharedPref().isView = true;
+    NavigatorPush.push(context, const AppNavigation());
   }
 
   @override
@@ -77,40 +66,20 @@ class _SplashScreenState extends State<SplashScreen> {
     return StoreConnector<AppState, AppState>(
       converter: (store) => store.state,
       builder: (_, state) => Scaffold(
+        backgroundColor: Colors.white,
         body: Container(
           width: DeviceInfo(context).width,
           height: DeviceInfo(context).height,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: const Alignment(0.8, 1),
-              colors: [
-                MyTheme.gradient_color_1,
-                MyTheme.gradient_color_2,
-              ],
-            ),
-          ),
+          color: Colors.white,
           child: Stack(
             alignment: Alignment.center,
             children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: 72,
-                    width: 85,
-                    child: Image.asset(
-                      'assets/logo/app_logo.png',
-                      color: Colors.white,
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                  const SizedBox(height: 17),
-                  Text(
-                    AppConfig.app_name,
-                    style: Styles.medium_white_22,
-                  ),
-                ],
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 28),
+                child: Image.asset(
+                  'assets/logo/splash_logo.png',
+                  fit: BoxFit.contain,
+                ),
               ),
               Positioned(
                 bottom: 116,
@@ -118,7 +87,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   children: [
                     Text(
                       'v $_appVersion',
-                      style: Styles.medium_white_12,
+                      style: Styles.bold_arsenic_12,
                     ),
                     const SizedBox(
                       height: 6,

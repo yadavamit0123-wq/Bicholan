@@ -653,17 +653,14 @@ class _HomeState extends State<Home> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              children: [
-                Image.asset(
-                  'assets/logo/appbar_logo.png',
-                  fit: BoxFit.contain,
-                  height: (width ?? 0) > 350 ? 36 : 30,
-                  width: (width ?? 0) > 350 ? 46 : 40,
-                ),
-                const SizedBox(width: 8.3),
-                buildAppName(width),
-              ],
+            SizedBox(
+              height: (width ?? 0) > 350 ? 42 : 34,
+              width: (width ?? 0) * 0.52,
+              child: Image.asset(
+                'assets/logo/splash_logo.png',
+                fit: BoxFit.contain,
+                alignment: Alignment.centerLeft,
+              ),
             ),
             Row(
               children: [

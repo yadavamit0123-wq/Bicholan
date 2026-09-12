@@ -1222,10 +1222,10 @@ class _ExploreState extends State<Explore> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             SizedBox(
-              height: iconSize * 1.6,
-              width: MediaQuery.of(context).size.width * 0.42,
+              height: iconSize * 1.7,
+              width: MediaQuery.of(context).size.width * 0.52,
               child: Image.asset(
-                'assets/logo/appbar_logo.png',
+                'assets/logo/splash_logo.png',
                 fit: BoxFit.contain,
                 alignment: Alignment.centerLeft,
               ),

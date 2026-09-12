@@ -1,7 +1,6 @@
 
 import 'dart:io';
 
-import 'package:active_matrimonial_flutter_app/app_config.dart';
 import 'package:active_matrimonial_flutter_app/components/common_widget.dart';
 import 'package:active_matrimonial_flutter_app/components/container_with_icon.dart';
 import 'package:active_matrimonial_flutter_app/components/custom_popup.dart';
@@ -263,11 +262,15 @@ class _HomeWithoutLoginState extends State<HomeWithoutLogin> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(children: [
-              Image.asset('assets/logo/appbar_logo.png', fit: BoxFit.contain, height: screenSize.height * 0.04), // Proportional size
-              SizedBox(width: screenSize.width * 0.02),
-              Text(AppConfig.app_name, style: Styles.bold_app_accent_16.copyWith(fontSize: screenSize.width * 0.045)), // Responsive font
-            ]),
+            SizedBox(
+              height: screenSize.height * 0.045,
+              width: screenSize.width * 0.52,
+              child: Image.asset(
+                'assets/logo/splash_logo.png',
+                fit: BoxFit.contain,
+                alignment: Alignment.centerLeft,
+              ),
+            ),
             Row(children: [
               CommonWidget.social_button(
                 gradient: Styles.buildLinearGradient(begin: Alignment.topLeft, end: Alignment.bottomRight),
