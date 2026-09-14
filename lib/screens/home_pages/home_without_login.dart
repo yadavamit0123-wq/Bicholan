@@ -264,9 +264,9 @@ class _HomeWithoutLoginState extends State<HomeWithoutLogin> {
           children: [
             SizedBox(
               height: screenSize.height * 0.045,
-              width: screenSize.width * 0.52,
+              width: screenSize.height * 0.045,
               child: Image.asset(
-                'assets/logo/splash_logo.png',
+                'assets/logo/app_logo.png',
                 fit: BoxFit.contain,
                 alignment: Alignment.centerLeft,
               ),

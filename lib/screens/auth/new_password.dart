@@ -398,10 +398,13 @@ class _NewPasswordState extends State<NewPassword> {
       child: Column(
         children: [
           const SizedBox(height: 78),
-          const ImageIcon(
-            AssetImage('assets/logo/app_logo.png'),
-            size: 93,
-            color: MyTheme.white,
+          SizedBox(
+            height: 110,
+            width: 110,
+            child: Image.asset(
+              'assets/logo/app_logo.png',
+              fit: BoxFit.contain,
+            ),
           ),
           Text(
             AppLocalizations.of(context)!.new_password_screen_title,

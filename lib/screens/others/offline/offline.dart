@@ -36,8 +36,12 @@ class _OfflineState extends State<Offline> {
               child: Column(
                 children: [
                   SizedBox(
-                    width: 75,
-                    child: Image.asset("assets/logo/app_logo.png"),
+                    height: 110,
+                    width: 110,
+                    child: Image.asset(
+                      'assets/logo/app_logo.png',
+                      fit: BoxFit.contain,
+                    ),
                   ),
                   const SizedBox(
                     height: 17,

@@ -45,10 +45,13 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(height: screenSize.height * 0.05),
-                    ImageIcon(
-                      const AssetImage('assets/logo/app_logo.png'),
-                      size: screenSize.height * 0.11,
-                      color: MyTheme.white,
+                    SizedBox(
+                      height: screenSize.height * 0.13,
+                      width: screenSize.height * 0.13,
+                      child: Image.asset(
+                        'assets/logo/app_logo.png',
+                        fit: BoxFit.contain,
+                      ),
                     ),
                     SizedBox(height: screenSize.height * 0.02),
                     Text(

@@ -655,9 +655,9 @@ class _HomeState extends State<Home> {
           children: [
             SizedBox(
               height: (width ?? 0) > 350 ? 42 : 34,
-              width: (width ?? 0) * 0.52,
+              width: (width ?? 0) > 350 ? 42 : 34,
               child: Image.asset(
-                'assets/logo/splash_logo.png',
+                'assets/logo/app_logo.png',
                 fit: BoxFit.contain,
                 alignment: Alignment.centerLeft,
               ),

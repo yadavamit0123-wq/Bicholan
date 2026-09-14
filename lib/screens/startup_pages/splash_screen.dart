@@ -74,10 +74,11 @@ class _SplashScreenState extends State<SplashScreen> {
           child: Stack(
             alignment: Alignment.center,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 28),
+              SizedBox(
+                height: 160,
+                width: 160,
                 child: Image.asset(
-                  'assets/logo/splash_logo.png',
+                  'assets/logo/app_logo.png',
                   fit: BoxFit.contain,
                 ),
               ),
