@@ -183,12 +183,7 @@ class _SignupVerifyState extends State<SignupVerify> {
     return Container(
       height: DeviceInfo(context).height! * 0.40,
       width: double.infinity,
-      decoration: BoxDecoration(
-        gradient: Styles.buildLinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
-      ),
+      color: Colors.white,
       child: Column(
         children: [
           const SizedBox(height: 78),
@@ -202,15 +197,11 @@ class _SignupVerifyState extends State<SignupVerify> {
           ),
           Text(
             AppLocalizations.of(context)!.verify_screen_title,
-            style: const TextStyle(
-              color: MyTheme.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 21,
-            ),
+            style: Styles.bold_arsenic_16.copyWith(fontSize: 21),
           ),
           Text(
             AppLocalizations.of(context)!.verify_screen_sub_title,
-            style: Styles.regular_white_14,
+            style: Styles.regular_arsenic_14,
           ),
         ],
       ),

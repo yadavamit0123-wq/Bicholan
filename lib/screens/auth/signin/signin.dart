@@ -371,12 +371,7 @@ class _LoginState extends State<Login> {
     return Container(
       height: DeviceInfo(context).height! * 0.50,
       width: double.infinity,
-      decoration: BoxDecoration(
-        gradient: Styles.buildLinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
-      ),
+      color: Colors.white,
       child: Column(
         children: [
           const SizedBox(height: 78),
@@ -390,11 +385,11 @@ class _LoginState extends State<Login> {
           ),
           Text(
             AppLocalizations.of(context)!.login_text_title,
-            style: Styles.bold_white_22,
+            style: Styles.bold_arsenic_16.copyWith(fontSize: 22),
           ),
           Text(
             AppLocalizations.of(context)!.login_text_sub_title,
-            style: Styles.regular_white_14,
+            style: Styles.regular_arsenic_14,
           ),
         ],
       ),

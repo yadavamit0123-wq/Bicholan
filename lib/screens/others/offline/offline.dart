@@ -21,18 +21,16 @@ class _OfflineState extends State<Offline> {
 
   buildBody(context) {
     return Container(
-      decoration: BoxDecoration(
-          gradient: Styles.buildLinearGradient(
-              begin: Alignment.topCenter, end: Alignment.bottomCenter)),
       width: DeviceInfo(context).width,
       height: double.infinity,
+      color: Colors.white,
       child: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 200,
-              ),
+            Container(
+              width: double.infinity,
+              color: Colors.white,
+              padding: const EdgeInsets.only(top: 200, bottom: 24),
               child: Column(
                 children: [
                   SizedBox(
@@ -43,16 +41,24 @@ class _OfflineState extends State<Offline> {
                       fit: BoxFit.contain,
                     ),
                   ),
-                  const SizedBox(
-                    height: 17,
-                  ),
+                  const SizedBox(height: 17),
                   Text(
                     AppConfig.app_name,
-                    style: Styles.medium_white_22,
+                    style: Styles.bold_arsenic_16.copyWith(fontSize: 22),
                   ),
                 ],
               ),
             ),
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                gradient: Styles.buildLinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+              ),
+              child: Column(
+                children: [
             Padding(
               padding: const EdgeInsets.only(
                 top: 80,
@@ -99,6 +105,9 @@ class _OfflineState extends State<Offline> {
               child: Text(
                 "Please turn on your internet connection",
                 style: TextStyle(fontSize: 14, color: MyTheme.zircon),
+              ),
+            ),
+                ],
               ),
             ),
           ],

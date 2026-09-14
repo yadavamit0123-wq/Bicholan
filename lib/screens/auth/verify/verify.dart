@@ -174,12 +174,7 @@ class _VerifyState extends State<Verify> {
     return Container(
       height: screenSize.height * 0.40,
       width: double.infinity,
-      decoration: BoxDecoration(
-        gradient: Styles.buildLinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
-      ),
+      color: Colors.white,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -195,16 +190,16 @@ class _VerifyState extends State<Verify> {
           SizedBox(height: screenSize.height * 0.02),
           Text(
             AppLocalizations.of(context)!.verify_screen_title,
-            style: TextStyle(
-              color: MyTheme.white,
-              fontWeight: FontWeight.bold,
+            style: Styles.bold_arsenic_16.copyWith(
               fontSize: screenSize.width * 0.06,
             ),
           ),
           SizedBox(height: screenSize.height * 0.01),
           Text(
             AppLocalizations.of(context)!.verify_screen_sub_title,
-            style: Styles.regular_white_14.copyWith(fontSize: screenSize.width * 0.035), // Responsive font
+            style: Styles.regular_arsenic_14.copyWith(
+              fontSize: screenSize.width * 0.035,
+            ),
           ),
         ],
       ),

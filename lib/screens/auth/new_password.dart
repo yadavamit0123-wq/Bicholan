@@ -389,12 +389,7 @@ class _NewPasswordState extends State<NewPassword> {
     return Container(
       height: DeviceInfo(context).height! * 0.40,
       width: DeviceInfo(context).width,
-      decoration: BoxDecoration(
-        gradient: Styles.buildLinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
-      ),
+      color: Colors.white,
       child: Column(
         children: [
           const SizedBox(height: 78),
@@ -408,11 +403,11 @@ class _NewPasswordState extends State<NewPassword> {
           ),
           Text(
             AppLocalizations.of(context)!.new_password_screen_title,
-            style: Styles.bold_white_22,
+            style: Styles.bold_arsenic_16.copyWith(fontSize: 22),
           ),
           Text(
             AppLocalizations.of(context)!.new_password_screen_subtitle,
-            style: Styles.regular_white_14,
+            style: Styles.regular_arsenic_14,
           ),
         ],
       ),

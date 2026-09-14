@@ -1209,12 +1209,7 @@ class _SignUpState extends State<SignUp> {
     return Container(
       height: 250,
       width: double.infinity,
-      decoration: BoxDecoration(
-        gradient: Styles.buildLinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
-      ),
+      color: Colors.white,
       child: Column(
         children: [
           const SizedBox(height: 78),
@@ -1228,11 +1223,11 @@ class _SignUpState extends State<SignUp> {
           ),
           Text(
             AppLocalizations.of(context)!.signup_screen_title,
-            style: Styles.bold_white_22,
+            style: Styles.bold_arsenic_16.copyWith(fontSize: 22),
           ),
           Text(
             AppLocalizations.of(context)!.signup_screen_subtitle,
-            style: Styles.regular_white_14,
+            style: Styles.regular_arsenic_14,
           ),
         ],
       ),

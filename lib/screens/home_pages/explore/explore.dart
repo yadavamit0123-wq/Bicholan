@@ -1223,9 +1223,9 @@ class _ExploreState extends State<Explore> {
           children: [
             SizedBox(
               height: iconSize * 1.7,
-              width: iconSize * 1.7,
+              width: iconSize * 1.7 * 2.58,
               child: Image.asset(
-                'assets/logo/app_logo.png',
+                'assets/logo/splash_logo.png',
                 fit: BoxFit.contain,
                 alignment: Alignment.centerLeft,
               ),

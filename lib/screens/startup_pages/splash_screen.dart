@@ -74,12 +74,12 @@ class _SplashScreenState extends State<SplashScreen> {
           child: Stack(
             alignment: Alignment.center,
             children: [
-              SizedBox(
-                height: 160,
-                width: 160,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Image.asset(
-                  'assets/logo/app_logo.png',
+                  'assets/logo/splash_logo.png',
                   fit: BoxFit.contain,
+                  width: DeviceInfo(context).width! - 40,
                 ),
               ),
               Positioned(

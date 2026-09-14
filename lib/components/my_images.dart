@@ -19,10 +19,14 @@ class MyImages {
         );
       },
       errorWidget: (BuildContext context, String url, dynamic error) {
-        return Image.asset(
-          'assets/logo/app_logo.png',
-          fit: fit,
-          color: Colors.grey.withOpacity(0.4),
+        return ColoredBox(
+          color: Colors.white,
+          child: Center(
+            child: Image.asset(
+              'assets/logo/app_logo.png',
+              fit: BoxFit.contain,
+            ),
+          ),
         );
       },
     );

@@ -35,12 +35,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
               Container(
                 height: screenSize.height * 0.40,
                 width: double.infinity,
-                decoration: BoxDecoration(
-                  gradient: Styles.buildLinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                  ),
-                ),
+                color: Colors.white,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -56,13 +51,17 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     SizedBox(height: screenSize.height * 0.02),
                     Text(
                       AppLocalizations.of(context)!.forget_screen_title,
-                      style: Styles.bold_white_22.copyWith(fontSize: screenSize.width * 0.06),
+                      style: Styles.bold_arsenic_16.copyWith(
+                        fontSize: screenSize.width * 0.06,
+                      ),
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: screenSize.width * 0.1),
                       child: Text(
                         AppLocalizations.of(context)!.forget_screen_subtitle,
-                        style: Styles.regular_white_14.copyWith(fontSize: screenSize.width * 0.035),
+                        style: Styles.regular_arsenic_14.copyWith(
+                          fontSize: screenSize.width * 0.035,
+                        ),
                         textAlign: TextAlign.center,
                       ),
                     ),

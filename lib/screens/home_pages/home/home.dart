@@ -654,10 +654,10 @@ class _HomeState extends State<Home> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             SizedBox(
-              height: (width ?? 0) > 350 ? 42 : 34,
-              width: (width ?? 0) > 350 ? 42 : 34,
+              height: (width ?? 0) > 350 ? 40.0 : 34.0,
+              width: ((width ?? 0) > 350 ? 40.0 : 34.0) * 2.58,
               child: Image.asset(
-                'assets/logo/app_logo.png',
+                'assets/logo/splash_logo.png',
                 fit: BoxFit.contain,
                 alignment: Alignment.centerLeft,
               ),
