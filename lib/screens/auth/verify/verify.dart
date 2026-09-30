@@ -45,7 +45,7 @@ class _VerifyState extends State<Verify> {
                   height: screenSize.height * 0.65,
                   width: screenSize.width,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: MyTheme.auth_screen_bg,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(screenSize.width * 0.08),
                       topRight: Radius.circular(screenSize.width * 0.08),
@@ -174,7 +174,7 @@ class _VerifyState extends State<Verify> {
     return Container(
       height: screenSize.height * 0.40,
       width: double.infinity,
-      color: Colors.white,
+      color: MyTheme.auth_screen_bg,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -190,14 +190,14 @@ class _VerifyState extends State<Verify> {
           SizedBox(height: screenSize.height * 0.02),
           Text(
             AppLocalizations.of(context)!.verify_screen_title,
-            style: Styles.bold_arsenic_16.copyWith(
+            style: Styles.bold_white_22.copyWith(
               fontSize: screenSize.width * 0.06,
             ),
           ),
           SizedBox(height: screenSize.height * 0.01),
           Text(
             AppLocalizations.of(context)!.verify_screen_sub_title,
-            style: Styles.regular_arsenic_14.copyWith(
+            style: Styles.regular_white_14.copyWith(
               fontSize: screenSize.width * 0.035,
             ),
           ),

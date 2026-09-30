@@ -9,7 +9,7 @@ class AppConfig {
   static String purshase_code =
       'your_purchase_code'; // enter your purchase_code here
   static const bool HTTPS = true; //if you are using localhost set it to false
-  static const DOMAIN_PATH = "bicholan.codenetbiztech.com"; // enter your domain name  here
+  static const DOMAIN_PATH = "bicholan.com"; // enter your domain name  here
   static const String MAP_KEY = "AIzaSyA_usa-2matJnaEuxFvNag8qhXL51w4vJM";
 
   // do not configure these below

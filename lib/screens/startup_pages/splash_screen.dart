@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:active_matrimonial_flutter_app/app_config.dart';
+import 'package:active_matrimonial_flutter_app/const/my_theme.dart';
 import 'package:active_matrimonial_flutter_app/const/style.dart';
 import 'package:active_matrimonial_flutter_app/helpers/device_info.dart';
 import 'package:active_matrimonial_flutter_app/helpers/navigator_push.dart';
@@ -66,11 +67,11 @@ class _SplashScreenState extends State<SplashScreen> {
     return StoreConnector<AppState, AppState>(
       converter: (store) => store.state,
       builder: (_, state) => Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: MyTheme.splash_screen_bg,
         body: Container(
           width: DeviceInfo(context).width,
           height: DeviceInfo(context).height,
-          color: Colors.white,
+          color: MyTheme.splash_screen_bg,
           child: Stack(
             alignment: Alignment.center,
             children: [

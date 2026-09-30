@@ -41,7 +41,7 @@ class _SignupVerifyState extends State<SignupVerify> {
                       height: DeviceInfo(context).height! * 0.65,
                       width: DeviceInfo(context).width,
                       decoration: const BoxDecoration(
-                        color: Colors.white,
+                        color: MyTheme.auth_screen_bg,
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(32.0),
                           topRight: Radius.circular(32.0),
@@ -183,7 +183,7 @@ class _SignupVerifyState extends State<SignupVerify> {
     return Container(
       height: DeviceInfo(context).height! * 0.40,
       width: double.infinity,
-      color: Colors.white,
+      color: MyTheme.auth_screen_bg,
       child: Column(
         children: [
           const SizedBox(height: 78),
@@ -197,11 +197,11 @@ class _SignupVerifyState extends State<SignupVerify> {
           ),
           Text(
             AppLocalizations.of(context)!.verify_screen_title,
-            style: Styles.bold_arsenic_16.copyWith(fontSize: 21),
+            style: Styles.bold_white_22.copyWith(fontSize: 21),
           ),
           Text(
             AppLocalizations.of(context)!.verify_screen_sub_title,
-            style: Styles.regular_arsenic_14,
+            style: Styles.regular_white_14,
           ),
         ],
       ),

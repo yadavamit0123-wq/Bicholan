@@ -135,7 +135,7 @@ class _NewPasswordState extends State<NewPassword> {
                       height: DeviceInfo(context).height! * 0.65,
                       width: DeviceInfo(context).width,
                       decoration: const BoxDecoration(
-                        color: Colors.white,
+                        color: MyTheme.auth_screen_bg,
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(32.0),
                           topRight: Radius.circular(32.0),
@@ -389,7 +389,7 @@ class _NewPasswordState extends State<NewPassword> {
     return Container(
       height: DeviceInfo(context).height! * 0.40,
       width: DeviceInfo(context).width,
-      color: Colors.white,
+      color: MyTheme.auth_screen_bg,
       child: Column(
         children: [
           const SizedBox(height: 78),
@@ -403,11 +403,11 @@ class _NewPasswordState extends State<NewPassword> {
           ),
           Text(
             AppLocalizations.of(context)!.new_password_screen_title,
-            style: Styles.bold_arsenic_16.copyWith(fontSize: 22),
+            style: Styles.bold_white_22,
           ),
           Text(
             AppLocalizations.of(context)!.new_password_screen_subtitle,
-            style: Styles.regular_arsenic_14,
+            style: Styles.regular_white_14,
           ),
         ],
       ),

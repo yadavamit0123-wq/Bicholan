@@ -172,7 +172,7 @@ class _SignUpState extends State<SignUp> {
                           Container(
                             width: DeviceInfo(context).width,
                             decoration: const BoxDecoration(
-                              color: Colors.white,
+                              color: MyTheme.auth_screen_bg,
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(32.0),
                                 topRight: Radius.circular(32.0),
@@ -1209,7 +1209,7 @@ class _SignUpState extends State<SignUp> {
     return Container(
       height: 250,
       width: double.infinity,
-      color: Colors.white,
+      color: MyTheme.auth_screen_bg,
       child: Column(
         children: [
           const SizedBox(height: 78),
@@ -1223,11 +1223,11 @@ class _SignUpState extends State<SignUp> {
           ),
           Text(
             AppLocalizations.of(context)!.signup_screen_title,
-            style: Styles.bold_arsenic_16.copyWith(fontSize: 22),
+            style: Styles.bold_white_22,
           ),
           Text(
             AppLocalizations.of(context)!.signup_screen_subtitle,
-            style: Styles.regular_arsenic_14,
+            style: Styles.regular_white_14,
           ),
         ],
       ),

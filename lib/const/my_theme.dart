@@ -28,4 +28,7 @@ class MyTheme {
 
   static Color gradient_color_1 = Color.fromRGBO(253, 48, 110, 1);
   static Color gradient_color_2 = Color.fromRGBO(255, 87, 65, 1);
+
+  static const Color splash_screen_bg = Color(0xFFFDE9F4);
+  static const Color auth_screen_bg = Color(0xFFFF6500);
 }
