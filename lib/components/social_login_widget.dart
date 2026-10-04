@@ -9,7 +9,10 @@ import '../helpers/social_logins.dart';
 import 'common_widget.dart';
 
 class SocialLoginWidget extends StatefulWidget {
-  const SocialLoginWidget({super.key});
+  const SocialLoginWidget({super.key, this.loginScreenStyle = false});
+
+  /// Full-width Google button + OR divider (login mockup).
+  final bool loginScreenStyle;
 
   @override
   State<SocialLoginWidget> createState() => _SocialLoginWidgetState();
@@ -19,8 +22,60 @@ class _SocialLoginWidgetState extends State<SocialLoginWidget> {
   bool? isGoogle = settingIsActive('google_login_activation', '1');
   bool? isFacebook = settingIsActive('facebook_login_activation', '1');
   bool? isTwitter = settingIsActive('twitter_login_activation', "1");
+
   @override
   Widget build(BuildContext context) {
+    if (widget.loginScreenStyle) {
+      if (!isGoogle!) {
+        return const SizedBox.shrink();
+      }
+      return Column(
+        children: [
+          Row(
+            children: [
+              const Expanded(child: Divider(color: MyTheme.white, height: 1)),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Text(
+                  AppLocalizations.of(context)!.login_screen_or,
+                  style: Styles.regular_white_12,
+                ),
+              ),
+              const Expanded(child: Divider(color: MyTheme.white, height: 1)),
+            ],
+          ),
+          const SizedBox(height: 20),
+          InkWell(
+            onTap: () => SocialLogins().onPressedGoogleLogin(context),
+            borderRadius: BorderRadius.circular(28),
+            child: Container(
+              height: 50,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: MyTheme.white,
+                borderRadius: BorderRadius.circular(28),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/icon/icon_google.png',
+                    height: 22,
+                    width: 22,
+                  ),
+                  const SizedBox(width: 12),
+                  Text(
+                    AppLocalizations.of(context)!.login_screen_continue_with_google,
+                    style: Styles.bold_arsenic_12,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      );
+    }
+
     return Column(
       children: [
         if (isGoogle! || isFacebook! || isTwitter!)
@@ -48,7 +103,6 @@ class _SocialLoginWidgetState extends State<SocialLoginWidget> {
                 onpressed: () {
                   SocialLogins().onPressedFacebookLogin(context);
                 },
-                // opacity: 0.1,
               ),
             ),
             SizedBox(width: DeviceInfo(context).width! * 0.05),
@@ -60,26 +114,12 @@ class _SocialLoginWidgetState extends State<SocialLoginWidget> {
                 height: 42,
                 radius: 20,
                 color: MyTheme.solitude,
-                // opacity: 0.1,
                 onpressed: () {
                   SocialLogins().onPressedGoogleLogin(context);
                 },
               ),
             ),
             SizedBox(width: DeviceInfo(context).width! * 0.05),
-            // Visibility(
-            //   visible: isTwitter!,
-            //   child: CommonWidget.social_button(
-            //       icon: "icon_twitter.png",
-            //       width: 42,
-            //       height: 42,
-            //       radius: 20,
-            //       color: MyTheme.solitude,
-            //       // opacity: 0.1,
-            //       onpressed: () {
-            //         SocialLogins().onPressedTwitterLogin(context);
-            //       }),
-            // ),
           ],
         ),
       ],

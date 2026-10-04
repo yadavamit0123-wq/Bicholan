@@ -118,7 +118,7 @@
 //                                 },
 //                                 decoration:
 //                                     InputStyle.inputDecoration_text_field(
-//                                   hint: "johndoe@example.com",
+//                                   hint: "Email",
 //                                 ),
 //                               )
 //                         : TextFormField(
@@ -138,7 +138,7 @@
 //                               return null;
 //                             },
 //                             decoration: InputStyle.inputDecoration_text_field(
-//                               hint: "johndoe@example.com",
+//                               hint: "Email",
 //                             ),
 //                           ),
 //                     itemSpacer(5, 0),
@@ -187,7 +187,7 @@
 //                       },
 //                       obscureText: vm.isObscure!,
 //                       decoration: InputStyle.inputDecoratio_password(
-//                           hint: ". . . . . . . .",
+//                           hint: "Password",
 //                           suffixIcon: GestureDetector(
 //                               onTap: () => store.dispatch(IsObscureAction()),
 //                               child: Icon(vm.isObscure!
@@ -551,7 +551,7 @@ class CustomPopUp {
                                         },
                                         decoration:
                                             InputStyle.inputDecoration_text_field(
-                                              hint: "johndoe@example.com",
+                                              hint: "Email",
                                             ),
                                       )
                                   : TextFormField(
@@ -574,7 +574,7 @@ class CustomPopUp {
                                     },
                                     decoration:
                                         InputStyle.inputDecoration_text_field(
-                                          hint: "johndoe@example.com",
+                                          hint: "Email",
                                         ),
                                   ),
                               itemSpacer(5, 0),
@@ -631,7 +631,7 @@ class CustomPopUp {
                                 },
                                 obscureText: vm.isObscure!,
                                 decoration: InputStyle.inputDecoratio_password(
-                                  hint: ". . . . . . . .",
+                                  hint: "Password",
                                   suffixIcon: GestureDetector(
                                     onTap:
                                         () => store.dispatch(IsObscureAction()),

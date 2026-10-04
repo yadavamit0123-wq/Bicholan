@@ -1,3 +1,4 @@
+import 'package:active_matrimonial_flutter_app/components/auth_screen_wordmark.dart';
 import 'package:active_matrimonial_flutter_app/const/my_theme.dart';
 import 'package:active_matrimonial_flutter_app/const/style.dart';
 import 'package:active_matrimonial_flutter_app/helpers/device_info.dart';
@@ -128,13 +129,7 @@ class _SignupVerifyState extends State<SignupVerify> {
       child: Container(
         height: 50,
         width: DeviceInfo(context).width,
-        decoration: BoxDecoration(
-          gradient: Styles.buildLinearGradient(
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-          ),
-          borderRadius: const BorderRadius.all(Radius.circular(12)),
-        ),
+        decoration: Styles.authPrimaryButtonDecoration(),
         child: Center(
           child:
               state.verifyState!.vloader == false
@@ -168,7 +163,7 @@ class _SignupVerifyState extends State<SignupVerify> {
                 },
                 child: Text(
                   ' ${AppLocalizations.of(context)!.forget_screen_login}',
-                  style: Styles.bold_app_accent_12,
+                  style: Styles.bold_auth_magenta_12,
                 ),
               ),
             ],
@@ -186,15 +181,8 @@ class _SignupVerifyState extends State<SignupVerify> {
       color: MyTheme.auth_screen_bg,
       child: Column(
         children: [
-          const SizedBox(height: 78),
-          SizedBox(
-            height: 110,
-            width: 110,
-            child: Image.asset(
-              'assets/logo/app_logo.png',
-              fit: BoxFit.contain,
-            ),
-          ),
+          const SizedBox(height: 56),
+          const AuthScreenWordmark(),
           Text(
             AppLocalizations.of(context)!.verify_screen_title,
             style: Styles.bold_white_22.copyWith(fontSize: 21),

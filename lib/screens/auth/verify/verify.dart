@@ -1,4 +1,5 @@
 
+import 'package:active_matrimonial_flutter_app/components/auth_screen_wordmark.dart';
 import 'package:active_matrimonial_flutter_app/const/my_theme.dart';
 import 'package:active_matrimonial_flutter_app/const/style.dart';
 import 'package:active_matrimonial_flutter_app/helpers/get_context.dart';
@@ -151,13 +152,7 @@ class _VerifyState extends State<Verify> {
       child: Container(
         height: screenSize.height * 0.06,
         width: screenSize.width,
-        decoration: BoxDecoration(
-          gradient: Styles.buildLinearGradient(
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-          ),
-          borderRadius: const BorderRadius.all(Radius.circular(12)),
-        ),
+        decoration: Styles.authPrimaryButtonDecoration(),
         child: Center(
           child: state.verifyState!.vloader == false
               ? Text(
@@ -179,14 +174,7 @@ class _VerifyState extends State<Verify> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(height: screenSize.height * 0.05),
-          SizedBox(
-            height: screenSize.height * 0.13,
-            width: screenSize.height * 0.13,
-            child: Image.asset(
-              'assets/logo/app_logo.png',
-              fit: BoxFit.contain,
-            ),
-          ),
+          AuthScreenWordmark(widthFactor: 0.72),
           SizedBox(height: screenSize.height * 0.02),
           Text(
             AppLocalizations.of(context)!.verify_screen_title,

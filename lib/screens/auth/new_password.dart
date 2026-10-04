@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:active_matrimonial_flutter_app/components/auth_screen_wordmark.dart';
 import 'package:active_matrimonial_flutter_app/components/common_input.dart';
 import 'package:active_matrimonial_flutter_app/components/group_item_with_child.dart';
 import 'package:active_matrimonial_flutter_app/components/my_gradient_container.dart';
@@ -175,7 +176,7 @@ class _NewPasswordState extends State<NewPassword> {
                                   setState(() {});
                                 },
                                 decoration: InputStyle.inputDecoratio_password(
-                                  hint: "● ● ● ● ● ● ● ●",
+                                  hint: "Password",
                                   suffixIcon: IconButton(
                                     padding: EdgeInsets.zero,
                                     constraints: const BoxConstraints(),
@@ -250,7 +251,7 @@ class _NewPasswordState extends State<NewPassword> {
                                   setState(() {});
                                 },
                                 decoration: InputStyle.inputDecoratio_password(
-                                  hint: "● ● ● ● ● ● ● ●",
+                                  hint: "Password",
                                   suffixIcon: IconButton(
                                     padding: EdgeInsets.zero,
                                     constraints: const BoxConstraints(),
@@ -292,6 +293,7 @@ class _NewPasswordState extends State<NewPassword> {
                             InkWell(
                               onTap: () => confirm(context),
                               child: MyGradientContainer(
+                                backgroundColor: MyTheme.auth_magenta,
                                 text:
                                     state.resetPasswordState!.rp_loader == false
                                         ? Text(
@@ -392,15 +394,8 @@ class _NewPasswordState extends State<NewPassword> {
       color: MyTheme.auth_screen_bg,
       child: Column(
         children: [
-          const SizedBox(height: 78),
-          SizedBox(
-            height: 110,
-            width: 110,
-            child: Image.asset(
-              'assets/logo/app_logo.png',
-              fit: BoxFit.contain,
-            ),
-          ),
+          const SizedBox(height: 56),
+          const AuthScreenWordmark(),
           Text(
             AppLocalizations.of(context)!.new_password_screen_title,
             style: Styles.bold_white_22,

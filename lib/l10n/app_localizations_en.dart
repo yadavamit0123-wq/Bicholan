@@ -93,16 +93,23 @@ class AppLocalizationsEn extends AppLocalizations {
   String get login_screen_email_helper_text => 'Use country code before number';
 
   @override
-  String get login_text_sub_title => 'Enter your login credentials';
+  String get login_text_sub_title =>
+      'Login to continue your journey to a better tomorrow';
 
   @override
-  String get login_screen_if_have_account => 'Do not have an account?';
+  String get login_screen_if_have_account => "Don't have an account?";
 
   @override
-  String get login_text_title => 'Login to your account';
+  String get login_text_title => 'Welcome Back!';
 
   @override
-  String get login_screen_forget_password => 'Forget Password ?';
+  String get login_screen_continue_with_google => 'Continue with Google';
+
+  @override
+  String get login_screen_or => 'OR';
+
+  @override
+  String get login_screen_forget_password => 'Forgot Password?';
 
   @override
   String get login_screen_or_signup => 'or, Login with';

@@ -58,6 +58,48 @@ class InputStyle {
     );
   }
 
+  static const double _authFieldRadius = 28;
+
+  /// Login mockup: white pill fields on orange background.
+  static InputDecoration authWhiteTextField({
+    required String hint,
+    IconData prefixIcon = Icons.person_outline,
+    Widget suffixIcon = const SizedBox(),
+  }) {
+    return InputDecoration(
+      filled: true,
+      fillColor: MyTheme.white,
+      prefixIcon: Icon(prefixIcon, color: MyTheme.gull_grey, size: 22),
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide.none,
+        borderRadius: BorderRadius.circular(_authFieldRadius),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(_authFieldRadius),
+        borderSide: BorderSide.none,
+      ),
+      isDense: true,
+      contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8),
+      hintText: hint,
+      hintStyle: TextStyle(fontSize: 14, color: MyTheme.gull_grey),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(_authFieldRadius),
+      ),
+      suffixIcon: suffixIcon,
+    );
+  }
+
+  static InputDecoration authWhitePasswordField({
+    required String hint,
+    required Widget suffixIcon,
+  }) {
+    return authWhiteTextField(
+      hint: hint,
+      prefixIcon: Icons.lock_outline,
+      suffixIcon: suffixIcon,
+    );
+  }
+
   static Widget manage_profile_expanded_box({required context, hint}) {
     return Expanded(
       child: Column(

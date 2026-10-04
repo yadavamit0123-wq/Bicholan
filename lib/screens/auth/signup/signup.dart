@@ -20,6 +20,7 @@ import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import '../../../app_config.dart';
+import '../../../components/auth_screen_wordmark.dart';
 import '../../../components/contact_faq_widget.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../redux/libs/drop_down/on_behalf_middleware.dart';
@@ -523,7 +524,7 @@ class _SignUpState extends State<SignUp> {
                                         obscureText: _isObscure,
                                         decoration:
                                             InputStyle.inputDecoratio_password(
-                                              hint: ". . . . . . .",
+                                              hint: "Password",
                                             ),
                                       ),
                                     ),
@@ -574,7 +575,7 @@ class _SignUpState extends State<SignUp> {
                                         obscureText: _isObscure,
                                         decoration:
                                             InputStyle.inputDecoratio_password(
-                                              hint: ". . . . . . .",
+                                              hint: "Password",
                                             ),
                                       ),
                                     ),
@@ -755,15 +756,8 @@ class _SignUpState extends State<SignUp> {
                                       child: Container(
                                         height: 50,
                                         width: DeviceInfo(context).width,
-                                        decoration: BoxDecoration(
-                                          gradient: Styles.buildLinearGradient(
-                                            begin: Alignment.centerLeft,
-                                            end: Alignment.centerRight,
-                                          ),
-                                          borderRadius: const BorderRadius.all(
-                                            Radius.circular(12),
-                                          ),
-                                        ),
+                                        decoration:
+                                            Styles.authPrimaryButtonDecoration(),
                                         child:
                                             state.signUpState!.isLoading ==
                                                     false
@@ -1048,7 +1042,7 @@ class _SignUpState extends State<SignUp> {
                     return null;
                   },
                   decoration: InputStyle.inputDecoration_text_field(
-                    hint: "johndoe@example.com",
+                    hint: "Email",
                   ),
                 ),
       );
@@ -1089,7 +1083,7 @@ class _SignUpState extends State<SignUp> {
                       return null;
                     },
                     decoration: InputStyle.inputDecoration_text_field(
-                      hint: "johndoe@example.com",
+                      hint: "Email",
                     ),
                   ),
               Padding(
@@ -1194,7 +1188,7 @@ class _SignUpState extends State<SignUp> {
               },
               child: Text(
                 ' ${AppLocalizations.of(context)!.signup_screen_login}',
-                style: Styles.bold_app_accent_12,
+                style: Styles.bold_auth_magenta_12,
               ),
             ),
           ],
@@ -1212,15 +1206,8 @@ class _SignUpState extends State<SignUp> {
       color: MyTheme.auth_screen_bg,
       child: Column(
         children: [
-          const SizedBox(height: 78),
-          SizedBox(
-            height: 110,
-            width: 110,
-            child: Image.asset(
-              'assets/logo/app_logo.png',
-              fit: BoxFit.contain,
-            ),
-          ),
+          const SizedBox(height: 56),
+          const AuthScreenWordmark(),
           Text(
             AppLocalizations.of(context)!.signup_screen_title,
             style: Styles.bold_white_22,

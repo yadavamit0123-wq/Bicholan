@@ -1,4 +1,5 @@
 
+import 'package:active_matrimonial_flutter_app/components/auth_screen_wordmark.dart';
 import 'package:active_matrimonial_flutter_app/components/common_input.dart';
 import 'package:active_matrimonial_flutter_app/components/group_item_with_child.dart';
 import 'package:active_matrimonial_flutter_app/const/my_theme.dart';
@@ -40,14 +41,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(height: screenSize.height * 0.05),
-                    SizedBox(
-                      height: screenSize.height * 0.13,
-                      width: screenSize.height * 0.13,
-                      child: Image.asset(
-                        'assets/logo/app_logo.png',
-                        fit: BoxFit.contain,
-                      ),
-                    ),
+                    const AuthScreenWordmark(widthFactor: 0.72),
                     SizedBox(height: screenSize.height * 0.02),
                     Text(
                       AppLocalizations.of(context)!.forget_screen_title,
@@ -121,7 +115,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                                   if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) return "Please enter a valid email address";
                                   return null;
                                 },
-                                decoration: InputStyle.inputDecoration_text_field(hint: "johndoe@example.com"),
+                                decoration: InputStyle.inputDecoration_text_field(hint: "Email"),
                               ),
                             ),
                             SizedBox(height: screenSize.height * 0.01),
@@ -146,10 +140,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                               child: Container(
                                 height: screenSize.height * 0.06,
                                 width: screenSize.width,
-                                decoration: BoxDecoration(
-                                  gradient: Styles.buildLinearGradient(begin: Alignment.centerLeft, end: Alignment.centerRight),
-                                  borderRadius: const BorderRadius.all(Radius.circular(12)),
-                                ),
+                                decoration: Styles.authPrimaryButtonDecoration(),
                                 child: Center(
                                   child: state.forgetPasswordState!.fp_loader == false
                                       ? Text(
@@ -172,7 +163,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                                   onTap: () => Navigator.pop(context),
                                   child: Text(
                                     ' ${AppLocalizations.of(context)!.forget_screen_login}',
-                                    style: Styles.bold_app_accent_12.copyWith(fontSize: screenSize.width * 0.035),
+                                    style: Styles.bold_auth_magenta_12.copyWith(fontSize: screenSize.width * 0.035),
                                   ),
                                 ),
                               ],

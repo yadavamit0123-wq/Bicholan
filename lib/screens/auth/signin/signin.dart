@@ -1,6 +1,5 @@
 import 'package:active_matrimonial_flutter_app/components/common_input.dart';
 import 'package:active_matrimonial_flutter_app/components/social_login_widget.dart';
-import 'package:active_matrimonial_flutter_app/const/const.dart';
 import 'package:active_matrimonial_flutter_app/const/my_theme.dart';
 import 'package:active_matrimonial_flutter_app/const/style.dart';
 import 'package:active_matrimonial_flutter_app/helpers/device_info.dart';
@@ -16,12 +15,8 @@ import 'package:active_matrimonial_flutter_app/l10n/app_localizations.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
-import '../../../components/contact_faq_widget.dart';
-import '../../../components/group_item_with_child.dart';
-import '../../../components/my_gradient_container.dart';
-import '../../../helpers/functions.dart';
+import '../../../components/auth_screen_wordmark.dart';
 import '../../../helpers/main_helpers.dart';
-import '../../../redux/libs/staticPage/static_page.dart';
 import '../forgetPassword/forget_password.dart';
 
 class Login extends StatefulWidget {
@@ -43,7 +38,6 @@ class _LoginState extends State<Login> {
         converter: (store) => store.state,
         onInit:
             (store) => [
-              store.dispatch(fetchStaticPageAction()),
               SharedPref().isView = true,
               store.dispatch(featureCheckMiddleware()),
             ],
@@ -57,341 +51,175 @@ class _LoginState extends State<Login> {
   }
 
   Widget buildBody(BuildContext context, AppState state) {
-    return Stack(
-      children: [
-        buildGradientContainer(context),
-        Positioned.fill(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                const SizedBox(height: 250),
-                Container(
-                  width: DeviceInfo(context).width,
-                  decoration: const BoxDecoration(
-                    color: MyTheme.auth_screen_bg,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(32.0),
-                      topRight: Radius.circular(32.0),
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(30.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        GroupItemWithChild(
-                          title:
-                              isOtpSystem
-                                  ? state.signInState!.isPhone!
-                                      ? "Phone"
-                                      : "Email"
-                                  : "Email",
-                          style: Styles.bold_app_accent_12,
-                          child:
-                              isOtpSystem
-                                  ? Container(
-                                    decoration: BoxDecoration(
-                                      color: MyTheme.solitude,
-                                      borderRadius: const BorderRadius.all(
-                                        Radius.circular(12.0),
-                                      ),
-                                    ),
-                                    child:
-                                        state.signInState!.isPhone!
-                                            ? InternationalPhoneNumberInput(
-                                              onInputChanged: (
-                                                PhoneNumber number,
-                                              ) {
-                                                store.dispatch(
-                                                  SetPhoneNumberAction(
-                                                    payload: number.phoneNumber,
-                                                  ),
-                                                );
-                                              },
-                                              countries:
-                                                  store.state.commonState!
-                                                      .countriesToString(),
-                                              spaceBetweenSelectorAndTextField:
-                                                  0,
-                                              selectorConfig:
-                                                  const SelectorConfig(
-                                                    selectorType:
-                                                        PhoneInputSelectorType
-                                                            .DIALOG,
-                                                  ),
-                                              inputDecoration: InputDecoration(
-                                                filled: true,
-                                                fillColor: MyTheme.solitude,
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                      borderSide:
-                                                          BorderSide.none,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                            12,
-                                                          ),
-                                                    ),
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                            16,
-                                                          ),
-                                                      borderSide:
-                                                          const BorderSide(
-                                                            color:
-                                                                Colors
-                                                                    .transparent,
-                                                          ),
-                                                    ),
-                                                isDense: true,
-                                                hintText: "01XXX XXX XXX",
-                                                hintStyle:
-                                                    Styles.regular_gull_grey_12,
-                                                border:
-                                                    const OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                            Radius.circular(12),
-                                                          ),
-                                                    ),
-                                              ),
-                                            )
-                                            : TextField(
-                                              controller:
-                                                  store
-                                                      .state
-                                                      .signInState!
-                                                      .emailController,
-                                              onTap: () {
-                                                store.dispatch(ClearAction());
-                                              },
-                                              decoration:
-                                                  InputStyle.inputDecoration_text_field(
-                                                    hint: "johndoe@example.com",
-                                                  ),
-                                            ),
-                                  )
-                                  : TextField(
-                                    controller:
-                                        store
-                                            .state
-                                            .signInState!
-                                            .emailController,
-                                    onTap: () {
-                                      store.dispatch(ClearAction());
-                                    },
-                                    decoration:
-                                        InputStyle.inputDecoration_text_field(
-                                          hint: "johndoe@example.com",
-                                        ),
-                                  ),
-                        ),
-                        Const.height5,
-                        if (state.addonState?.data?.otpSystem ?? false)
-                          InkWell(
-                            onTap: () {
-                              store.dispatch(IsPhoneOrEmailChangeAction());
-                            },
-                            child: SizedBox(
-                              width: DeviceInfo(context).width,
-                              child: Text(
-                                isOtpSystem
-                                    ? state.signInState!.isPhone!
-                                        ? AppLocalizations.of(
-                                          context,
-                                        )!.common_screen_use_email
-                                        : AppLocalizations.of(
-                                          context,
-                                        )!.common_screen_use_phone
-                                    : AppLocalizations.of(
-                                      context,
-                                    )!.common_screen_use_email,
-                                textAlign: TextAlign.right,
-                                style: Styles.italic_app_accent_10_underline,
-                              ),
-                            ),
-                          ),
-                        Column(
-                          children: [
-                            Const.height5,
-                            SizedBox(
-                              width: DeviceInfo(context).width,
-                              child: Text(
-                                state.signInState!.emailErrorText!,
-                                style: TextStyle(
-                                  color: MyTheme.failure,
-                                  fontSize: 11,
-                                ),
-                                textAlign: TextAlign.left,
-                              ),
-                            ),
-                          ],
-                        ),
+    final horizontal = DeviceInfo(context).width! * 0.07;
 
-                        Const.height5,
-
-                        GroupItemWithChild(
-                          title:
-                              AppLocalizations.of(
-                                context,
-                              )!.common_password_text,
-                          style: Styles.bold_app_accent_12,
-                          child: TextField(
-                            controller: state.signInState!.passwordController,
-                            obscureText: state.signInState!.isObscure!,
-                            decoration: InputStyle.inputDecoratio_password(
-                              hint: ". . . . . . . .",
-                              suffixIcon: GestureDetector(
-                                onTap: () => store.dispatch(IsObscureAction()),
-                                child: Icon(
-                                  state.signInState!.isObscure!
-                                      ? Icons.visibility_off
-                                      : Icons.visibility,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Column(
-                          children: [
-                            Const.height5,
-                            SizedBox(
-                              width: DeviceInfo(context).width,
-                              child: Text(
-                                state.signInState!.passwordErrorText!,
-                                style: TextStyle(
-                                  color: MyTheme.failure,
-                                  fontSize: 11,
-                                ),
-                                textAlign: TextAlign.left,
-                              ),
-                            ),
-                          ],
-                        ),
-                        // forget password
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const ForgetPassword(),
-                              ),
-                            );
-                          },
-                          child: SizedBox(
-                            width: DeviceInfo(context).width,
-                            child: Text(
-                              AppLocalizations.of(
-                                context,
-                              )!.login_screen_forget_password,
-                              style: Styles.italic_app_accent_10_underline,
-                              textAlign: TextAlign.right,
-                            ),
-                          ),
-                        ),
-
-                        const SizedBox(height: 40),
-                        InkWell(
-                          onTap:
-                              () => store.dispatch(
-                                LoginRequest(payloadContext: context),
-                              ),
-                          child: MyGradientContainer(
-                            text:
-                                state.signInState!.isLogin == false
-                                    ? Text(
-                                      AppLocalizations.of(
-                                        context,
-                                      )!.login_button_text,
-                                      style: Styles.bold_white_14,
-                                    )
-                                    : CircularProgressIndicator(
-                                      color: MyTheme.storm_grey,
-                                    ),
-                          ),
-                        ),
-
-                        const SizedBox(height: 40),
-
-                        /// sign in if not have account to login
-                        others(context, state),
-                      ],
-                    ),
+    return Container(
+      color: MyTheme.auth_screen_bg,
+      child: SafeArea(
+        child: SingleChildScrollView(
+          padding: EdgeInsets.fromLTRB(horizontal, 12, horizontal, 24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const SizedBox(height: 8),
+              const Center(child: AuthScreenWordmark()),
+              const SizedBox(height: 20),
+              Text(
+                AppLocalizations.of(context)!.login_text_title,
+                textAlign: TextAlign.center,
+                style: Styles.bold_white_22,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                AppLocalizations.of(context)!.login_text_sub_title,
+                textAlign: TextAlign.center,
+                style: Styles.regular_white_14,
+              ),
+              const SizedBox(height: 28),
+              if (isOtpSystem && (state.addonState?.data?.otpSystem ?? false))
+                state.signInState!.isPhone!
+                    ? InternationalPhoneNumberInput(
+                      onInputChanged: (PhoneNumber number) {
+                        store.dispatch(
+                          SetPhoneNumberAction(payload: number.phoneNumber),
+                        );
+                      },
+                      countries:
+                          store.state.commonState!.countriesToString(),
+                      spaceBetweenSelectorAndTextField: 0,
+                      selectorConfig: const SelectorConfig(
+                        selectorType: PhoneInputSelectorType.DIALOG,
+                      ),
+                      inputDecoration: InputStyle.authWhiteTextField(
+                        hint: "01XXX XXX XXX",
+                        prefixIcon: Icons.phone_outlined,
+                      ),
+                    )
+                    : TextField(
+                      controller: state.signInState!.emailController,
+                      onTap: () => store.dispatch(ClearAction()),
+                      decoration: InputStyle.authWhiteTextField(hint: "Email"),
+                    )
+              else
+                TextField(
+                  controller: state.signInState!.emailController,
+                  onTap: () => store.dispatch(ClearAction()),
+                  decoration: InputStyle.authWhiteTextField(hint: "Email"),
+                ),
+              if (state.addonState?.data?.otpSystem ?? false) ...[
+                const SizedBox(height: 8),
+                InkWell(
+                  onTap: () => store.dispatch(IsPhoneOrEmailChangeAction()),
+                  child: Text(
+                    isOtpSystem
+                        ? state.signInState!.isPhone!
+                            ? AppLocalizations.of(context)!.common_screen_use_email
+                            : AppLocalizations.of(context)!.common_screen_use_phone
+                        : AppLocalizations.of(context)!.common_screen_use_email,
+                    textAlign: TextAlign.right,
+                    style: Styles.italic_auth_magenta_10_underline,
                   ),
                 ),
               ],
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget others(BuildContext context, AppState state) {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              AppLocalizations.of(context)!.login_screen_if_have_account,
-              style: Styles.regular_gull_grey_12,
-            ),
-            InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) =>  SignUp()),
-                );
-              },
-              child: Text(
-                ' ${AppLocalizations.of(context)!.login_screen_signup}',
-                style: Styles.bold_app_accent_12,
+              if (state.signInState!.emailErrorText!.isNotEmpty) ...[
+                const SizedBox(height: 4),
+                Text(
+                  state.signInState!.emailErrorText!,
+                  style: TextStyle(color: MyTheme.failure, fontSize: 11),
+                ),
+              ],
+              const SizedBox(height: 16),
+              TextField(
+                controller: state.signInState!.passwordController,
+                obscureText: state.signInState!.isObscure!,
+                decoration: InputStyle.authWhitePasswordField(
+                  hint: "Password",
+                  suffixIcon: GestureDetector(
+                    onTap: () => store.dispatch(IsObscureAction()),
+                    child: Icon(
+                      state.signInState!.isObscure!
+                          ? Icons.visibility_off_outlined
+                          : Icons.visibility_outlined,
+                      color: MyTheme.gull_grey,
+                    ),
+                  ),
+                ),
               ),
-            ),
-          ],
+              if (state.signInState!.passwordErrorText!.isNotEmpty) ...[
+                const SizedBox(height: 4),
+                Text(
+                  state.signInState!.passwordErrorText!,
+                  style: TextStyle(color: MyTheme.failure, fontSize: 11),
+                ),
+              ],
+              const SizedBox(height: 8),
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ForgetPassword(),
+                    ),
+                  );
+                },
+                child: Text(
+                  AppLocalizations.of(context)!.login_screen_forget_password,
+                  textAlign: TextAlign.right,
+                  style: Styles.bold_auth_magenta_12,
+                ),
+              ),
+              const SizedBox(height: 24),
+              InkWell(
+                onTap:
+                    () => store.dispatch(
+                      LoginRequest(payloadContext: context),
+                    ),
+                child: Container(
+                  height: 50,
+                  width: double.infinity,
+                  decoration: Styles.authPrimaryButtonDecoration(
+                    borderRadius: BorderRadius.circular(28),
+                  ),
+                  child: Center(
+                    child:
+                        state.signInState!.isLogin == false
+                            ? Text(
+                              '${AppLocalizations.of(context)!.login_button_text} →',
+                              style: Styles.bold_white_14,
+                            )
+                            : CircularProgressIndicator(
+                              color: MyTheme.storm_grey,
+                            ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 28),
+              const SocialLoginWidget(loginScreenStyle: true),
+              const SizedBox(height: 28),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    AppLocalizations.of(context)!.login_screen_if_have_account,
+                    style: Styles.regular_white_12,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SignUp()),
+                      );
+                    },
+                    child: Text(
+                      ' ${AppLocalizations.of(context)!.login_screen_signup}',
+                      style: Styles.bold_auth_magenta_12,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
-        Const.height10,
-
-        /// social button google facebook twitter
-        const SocialLoginWidget(),
-        Const.height20,
-
-        ContactAndFaq(
-          title: "Frequently Asked Questions (FAQ)",
-          content: state.staticPageState!.faq,
-        ),
-      ],
-    );
-  }
-
-  Widget buildGradientContainer(BuildContext context) {
-    return Container(
-      height: DeviceInfo(context).height! * 0.50,
-      width: double.infinity,
-      color: MyTheme.auth_screen_bg,
-      child: Column(
-        children: [
-          const SizedBox(height: 78),
-          SizedBox(
-            height: 110,
-            width: 110,
-            child: Image.asset(
-              'assets/logo/app_logo.png',
-              fit: BoxFit.contain,
-            ),
-          ),
-          Text(
-            AppLocalizations.of(context)!.login_text_title,
-            style: Styles.bold_white_22,
-          ),
-          Text(
-            AppLocalizations.of(context)!.login_text_sub_title,
-            style: Styles.regular_white_14,
-          ),
-        ],
       ),
     );
   }

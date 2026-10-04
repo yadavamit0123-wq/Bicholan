@@ -31,4 +31,6 @@ class MyTheme {
 
   static const Color splash_screen_bg = Color(0xFFFDE9F4);
   static const Color auth_screen_bg = Color(0xFFFF6500);
+  /// Mockup: primary auth CTA + Forgot / Sign Up links on orange screens
+  static const Color auth_magenta = Color(0xFF861657);
 }

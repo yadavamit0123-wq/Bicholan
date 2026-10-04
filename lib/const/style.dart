@@ -22,6 +22,12 @@ class Styles {
     color: MyTheme.app_accent_color,
     decoration: TextDecoration.underline,
   );
+  static var italic_auth_magenta_10_underline = TextStyle(
+    fontStyle: FontStyle.italic,
+    fontSize: 10,
+    color: MyTheme.auth_magenta,
+    decoration: TextDecoration.underline,
+  );
   static var bold_white_10 =
       TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold);
 
@@ -74,6 +80,8 @@ class Styles {
   );
   static var bold_app_accent_12 = TextStyle(
       color: app_accent_color, fontSize: 12, fontWeight: FontWeight.bold);
+  static var bold_auth_magenta_12 = TextStyle(
+      color: MyTheme.auth_magenta, fontSize: 12, fontWeight: FontWeight.bold);
   static var bold_arsenic_12 = TextStyle(
       color: arsenic,
       fontWeight: FontWeight.bold,
@@ -190,6 +198,16 @@ class Styles {
       begin: begin,
       end: end,
       colors: [MyTheme.gradient_color_1, MyTheme.gradient_color_2],
+    );
+  }
+
+  static BoxDecoration authPrimaryButtonDecoration({
+    BorderRadiusGeometry borderRadius =
+        const BorderRadius.all(Radius.circular(12)),
+  }) {
+    return BoxDecoration(
+      color: MyTheme.auth_magenta,
+      borderRadius: borderRadius,
     );
   }
 

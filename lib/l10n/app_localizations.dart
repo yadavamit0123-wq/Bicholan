@@ -280,6 +280,12 @@ abstract class AppLocalizations {
   /// **'Login to your account'**
   String get login_text_title;
 
+  /// No description provided for @login_screen_continue_with_google.
+  String get login_screen_continue_with_google;
+
+  /// No description provided for @login_screen_or.
+  String get login_screen_or;
+
   /// No description provided for @login_screen_forget_password.
   ///
   /// In en, this message translates to:
