@@ -16,6 +16,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 
 import '../../../components/auth_screen_wordmark.dart';
+import '../../../helpers/functions.dart';
 import '../../../helpers/main_helpers.dart';
 import '../forgetPassword/forget_password.dart';
 
