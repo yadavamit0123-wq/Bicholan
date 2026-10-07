@@ -66,12 +66,6 @@ class _LoginState extends State<Login> {
               const Center(child: AuthScreenWordmark()),
               const SizedBox(height: 20),
               Text(
-                AppLocalizations.of(context)!.login_text_title,
-                textAlign: TextAlign.center,
-                style: Styles.bold_white_22,
-              ),
-              const SizedBox(height: 8),
-              Text(
                 AppLocalizations.of(context)!.login_text_sub_title,
                 textAlign: TextAlign.center,
                 style: Styles.regular_white_14,

@@ -179,8 +179,12 @@ class _HomeState extends State<Home> {
                                 children: [
                                   if (vm.activeMembers == null ||
                                       vm.activeMembers!.isEmpty)
-                                    CircularProgressIndicator(
-                                      color: MyTheme.app_accent_color,
+                                    Expanded(
+                                      child: Center(
+                                        child: CircularProgressIndicator(
+                                          color: MyTheme.app_accent_color,
+                                        ),
+                                      ),
                                     )
                                   else
                                     vm.isFetch == false

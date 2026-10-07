@@ -93,8 +93,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get login_screen_email_helper_text => 'Use country code before number';
 
   @override
-  String get login_text_sub_title =>
-      'Login to continue your journey to a better tomorrow';
+  String get login_text_sub_title => 'Login to find your Soulmate';
 
   @override
   String get login_screen_if_have_account => "Don't have an account?";
