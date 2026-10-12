@@ -81,6 +81,8 @@ class _SplashScreenState extends State<SplashScreen> {
                   'assets/logo/splash_logo.png',
                   fit: BoxFit.contain,
                   width: DeviceInfo(context).width! - 40,
+                  color: MyTheme.white,
+                  colorBlendMode: BlendMode.srcIn,
                 ),
               ),
               Positioned(
@@ -89,14 +91,14 @@ class _SplashScreenState extends State<SplashScreen> {
                   children: [
                     Text(
                       'v $_appVersion',
-                      style: Styles.bold_arsenic_12,
+                      style: Styles.bold_white_12,
                     ),
                     const SizedBox(
                       height: 6,
                     ),
                     Text(
                       AppConfig.copyright_text,
-                      style: Styles.regular_light_grey_12,
+                      style: Styles.regular_white_12,
                     ),
                   ],
                 ),

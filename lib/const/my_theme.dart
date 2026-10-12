@@ -29,7 +29,8 @@ class MyTheme {
   static Color gradient_color_1 = Color.fromRGBO(253, 48, 110, 1);
   static Color gradient_color_2 = Color.fromRGBO(255, 87, 65, 1);
 
-  static const Color splash_screen_bg = Color(0xFFFDE9F4);
+  /// Splash + login: same orange; splash logo uses white tint (Option B).
+  static const Color splash_screen_bg = Color(0xFFFF6500);
   static const Color auth_screen_bg = Color(0xFFFF6500);
   /// Mockup: primary auth CTA + Forgot / Sign Up links on orange screens
   static const Color auth_magenta = Color(0xFF861657);
